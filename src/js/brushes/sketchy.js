@@ -1,74 +1,74 @@
 function sketchy( context )
 {
-	this.init( context );
+    this.init( context );
 }
 
 sketchy.prototype =
 {
-	name: "Sketchy",
-	
-	context: null,
+    name: "Sketchy",
 
-	prevMouseX: null, prevMouseY: null,
+    context: null,
 
-	points: null, count: null,
+    prevMouseX: null, prevMouseY: null,
 
-	init: function( context )
-	{
-		this.context = context;
-		this.context.globalCompositeOperation = 'source-over';
+    points: null, count: null,
 
-		this.points = new Array();
-		this.count = 0;
-	},
+    init: function( context )
+    {
+        this.context = context;
+        this.context.globalCompositeOperation = 'source-over';
 
-	destroy: function()
-	{
-	},
+        this.points = new Array();
+        this.count = 0;
+    },
 
-	strokeStart: function( mouseX, mouseY )
-	{
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
-	},
+    destroy: function()
+    {
+    },
 
-	stroke: function( mouseX, mouseY )
-	{
-		var i, dx, dy, d;
+    strokeStart: function( mouseX, mouseY )
+    {
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
+    },
 
-		this.points.push( [ mouseX, mouseY ] );
+    stroke: function( mouseX, mouseY )
+    {
+        var i, dx, dy, d;
 
-		this.context.lineWidth = BRUSH_SIZE;
-		this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.05 * BRUSH_PRESSURE + ")";
+        this.points.push( [ mouseX, mouseY ] );
 
-		this.context.beginPath();
-		this.context.moveTo(this.prevMouseX, this.prevMouseY);
-		this.context.lineTo(mouseX, mouseY);
-		this.context.stroke();
+        this.context.lineWidth = BRUSH_SIZE;
+        this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.05 * BRUSH_PRESSURE + ")";
 
-		for (i = 0; i < this.points.length; i++)
-		{
-			dx = this.points[i][0] - this.points[this.count][0];
-			dy = this.points[i][1] - this.points[this.count][1];
-			d = dx * dx + dy * dy;
+        this.context.beginPath();
+        this.context.moveTo(this.prevMouseX, this.prevMouseY);
+        this.context.lineTo(mouseX, mouseY);
+        this.context.stroke();
 
-			if (d < 4000 && Math.random() > (d / 2000))
-			{
-				this.context.beginPath();
-				this.context.moveTo( this.points[this.count][0] + (dx * 0.3), this.points[this.count][1] + (dy * 0.3));
-				this.context.lineTo( this.points[i][0] - (dx * 0.3), this.points[i][1] - (dy * 0.3));
-				this.context.stroke();
-			}
-		}
+        for (i = 0; i < this.points.length; i++)
+        {
+            dx = this.points[i][0] - this.points[this.count][0];
+            dy = this.points[i][1] - this.points[this.count][1];
+            d = dx * dx + dy * dy;
 
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
+            if (d < 4000 && Math.random() > (d / 2000))
+            {
+                this.context.beginPath();
+                this.context.moveTo( this.points[this.count][0] + (dx * 0.3), this.points[this.count][1] + (dy * 0.3));
+                this.context.lineTo( this.points[i][0] - (dx * 0.3), this.points[i][1] - (dy * 0.3));
+                this.context.stroke();
+            }
+        }
 
-		this.count ++;
-	},
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
 
-	strokeEnd: function()
-	{
-		
-	}
+        this.count ++;
+    },
+
+    strokeEnd: function()
+    {
+
+    }
 }

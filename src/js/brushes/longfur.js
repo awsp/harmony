@@ -1,63 +1,63 @@
 function longfur( context )
 {
-	this.init( context );
+    this.init( context );
 }
 
 longfur.prototype =
 {
-	name: "Long Fur",
-	
-	context: null,
+    name: "Long Fur",
 
-	points: null, count: null,
+    context: null,
 
-	init: function( context )
-	{
-		this.context = context;
-		this.context.globalCompositeOperation = 'source-over';
-		
-		this.points = new Array();
-		this.count = 0;
-	},
+    points: null, count: null,
 
-	destroy: function()
-	{
-	},
+    init: function( context )
+    {
+        this.context = context;
+        this.context.globalCompositeOperation = 'source-over';
 
-	strokeStart: function( mouseX, mouseY )
-	{
-	},
+        this.points = new Array();
+        this.count = 0;
+    },
 
-	stroke: function( mouseX, mouseY )
-	{
-		var i, size, dx, dy, d;
+    destroy: function()
+    {
+    },
 
-		this.points.push( [ mouseX, mouseY ] );
-		
-		this.context.lineWidth = BRUSH_SIZE;		
-		this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.05 * BRUSH_PRESSURE + ")";
+    strokeStart: function( mouseX, mouseY )
+    {
+    },
 
-		for (i = 0; i < this.points.length; i++)
-		{
-			size = -Math.random();
-			dx = this.points[i][0] - this.points[this.count][0];
-			dy = this.points[i][1] - this.points[this.count][1];
-			d = dx * dx + dy * dy;
+    stroke: function( mouseX, mouseY )
+    {
+        var i, size, dx, dy, d;
 
-			if (d < 4000 && Math.random() > d / 4000)
-			{
-				this.context.beginPath();
-				this.context.moveTo( this.points[this.count][0] + (dx * size), this.points[this.count][1] + (dy * size));
-				this.context.lineTo( this.points[i][0] - (dx * size) + Math.random() * 2, this.points[i][1] - (dy * size) + Math.random() * 2);
-				this.context.stroke();
-			}
-		}
-		
-		this.count ++;
-	},
+        this.points.push( [ mouseX, mouseY ] );
 
-	strokeEnd: function()
-	{
-		
-	}
+        this.context.lineWidth = BRUSH_SIZE;
+        this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.05 * BRUSH_PRESSURE + ")";
+
+        for (i = 0; i < this.points.length; i++)
+        {
+            size = -Math.random();
+            dx = this.points[i][0] - this.points[this.count][0];
+            dy = this.points[i][1] - this.points[this.count][1];
+            d = dx * dx + dy * dy;
+
+            if (d < 4000 && Math.random() > d / 4000)
+            {
+                this.context.beginPath();
+                this.context.moveTo( this.points[this.count][0] + (dx * size), this.points[this.count][1] + (dy * size));
+                this.context.lineTo( this.points[i][0] - (dx * size) + Math.random() * 2, this.points[i][1] - (dy * size) + Math.random() * 2);
+                this.context.stroke();
+            }
+        }
+
+        this.count ++;
+    },
+
+    strokeEnd: function()
+    {
+
+    }
 }

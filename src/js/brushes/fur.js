@@ -1,73 +1,73 @@
 function fur( context )
 {
-	this.init( context );
+    this.init( context );
 }
 
 fur.prototype =
 {
-	name: "Fur",
-	
-	context: null,
+    name: "Fur",
 
-	prevMouseX: null, prevMouseY: null,
+    context: null,
 
-	points: null, count: null,
+    prevMouseX: null, prevMouseY: null,
 
-	init: function( context )
-	{
-		this.context = context;
+    points: null, count: null,
 
-		this.points = new Array();
-		this.count = 0;
-	},
+    init: function( context )
+    {
+        this.context = context;
 
-	destroy: function()
-	{
-	},
+        this.points = new Array();
+        this.count = 0;
+    },
 
-	strokeStart: function( mouseX, mouseY )
-	{
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
-	},
+    destroy: function()
+    {
+    },
 
-	stroke: function( mouseX, mouseY )
-	{
-		var i, dx, dy, d;
+    strokeStart: function( mouseX, mouseY )
+    {
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
+    },
 
-		this.points.push( [ mouseX, mouseY ] );
+    stroke: function( mouseX, mouseY )
+    {
+        var i, dx, dy, d;
 
-		this.context.lineWidth = BRUSH_SIZE;
-		this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.1 * BRUSH_PRESSURE + ")";
-		
-		this.context.beginPath();
-		this.context.moveTo(this.prevMouseX, this.prevMouseY);
-		this.context.lineTo(mouseX, mouseY);
-		this.context.stroke();
+        this.points.push( [ mouseX, mouseY ] );
 
-		for (i = 0; i < this.points.length; i++)
-		{
-			dx = this.points[i][0] - this.points[this.count][0];
-			dy = this.points[i][1] - this.points[this.count][1];
-			d = dx * dx + dy * dy;
+        this.context.lineWidth = BRUSH_SIZE;
+        this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.1 * BRUSH_PRESSURE + ")";
 
-			if (d < 2000 && Math.random() > d / 2000)
-			{
-				this.context.beginPath();
-				this.context.moveTo( mouseX + (dx * 0.5), mouseY + (dy * 0.5));
-				this.context.lineTo( mouseX - (dx * 0.5), mouseY - (dy * 0.5));
-				this.context.stroke();
-			}
-		}
+        this.context.beginPath();
+        this.context.moveTo(this.prevMouseX, this.prevMouseY);
+        this.context.lineTo(mouseX, mouseY);
+        this.context.stroke();
 
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
+        for (i = 0; i < this.points.length; i++)
+        {
+            dx = this.points[i][0] - this.points[this.count][0];
+            dy = this.points[i][1] - this.points[this.count][1];
+            d = dx * dx + dy * dy;
 
-		this.count ++;
-	},
+            if (d < 2000 && Math.random() > d / 2000)
+            {
+                this.context.beginPath();
+                this.context.moveTo( mouseX + (dx * 0.5), mouseY + (dy * 0.5));
+                this.context.lineTo( mouseX - (dx * 0.5), mouseY - (dy * 0.5));
+                this.context.stroke();
+            }
+        }
 
-	strokeEnd: function()
-	{
-		
-	}
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
+
+        this.count ++;
+    },
+
+    strokeEnd: function()
+    {
+
+    }
 }

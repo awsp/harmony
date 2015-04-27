@@ -1,98 +1,98 @@
 function hmirrorsimple( context )
 {
-	this.init( context );
+    this.init( context );
 }
 
 hmirrorsimple.prototype =
 {
-	name: "Horizontal Simple Mirror",
-	
-	context: null,
-	
-	leftBrush: null,
-	rightBrush: null,
+    name: "Horizontal Simple Mirror",
 
-	init: function( context )
-	{
-		this.context = context;
-		this.leftBrush = new simple(context);
-		this.rightBrush = new simple(context);
-	},
+    context: null,
 
-	destroy: function()
-	{
-		this.leftBrush.destroy();
-		this.leftBrush = null;
-		this.rightBrush.destroy();
-		this.rightBrush = null;
-	},
+    leftBrush: null,
+    rightBrush: null,
 
-	strokeStart: function( mouseX, mouseY )
-	{
-		this.leftBrush.strokeStart(mouseX, mouseY);
-		this.rightBrush.strokeStart(this.context.canvas.width - mouseX, mouseY)
-		
-	},
+    init: function( context )
+    {
+        this.context = context;
+        this.leftBrush = new simple(context);
+        this.rightBrush = new simple(context);
+    },
 
-	stroke: function( mouseX, mouseY )
-	{
-		this.leftBrush.stroke(mouseX, mouseY);
-		this.rightBrush.stroke(this.context.canvas.width - mouseX, mouseY);
-	},
+    destroy: function()
+    {
+        this.leftBrush.destroy();
+        this.leftBrush = null;
+        this.rightBrush.destroy();
+        this.rightBrush = null;
+    },
 
-	strokeEnd: function()
-	{
-		this.leftBrush.strokeEnd();
-		this.rightBrush.strokeEnd();
-	}
+    strokeStart: function( mouseX, mouseY )
+    {
+        this.leftBrush.strokeStart(mouseX, mouseY);
+        this.rightBrush.strokeStart(this.context.canvas.width - mouseX, mouseY)
+
+    },
+
+    stroke: function( mouseX, mouseY )
+    {
+        this.leftBrush.stroke(mouseX, mouseY);
+        this.rightBrush.stroke(this.context.canvas.width - mouseX, mouseY);
+    },
+
+    strokeEnd: function()
+    {
+        this.leftBrush.strokeEnd();
+        this.rightBrush.strokeEnd();
+    }
 }
 
 function vmirrorsimple( context )
 {
-	this.init( context );
+    this.init( context );
 }
 
 vmirrorsimple.prototype =
 {
-	name: "Vertical Simple mirror",
-	
-	context: null,
-	
-	topBrush: null,
-	bottomBrush: null,
+    name: "Vertical Simple mirror",
 
-	init: function( context )
-	{
-		this.context = context;
-		this.topBrush = new simple(context);
-		this.bottomBrush = new simple(context);
-	},
+    context: null,
 
-	destroy: function()
-	{
-		this.topBrush.destroy();
-		this.topBrush = null;
-		this.bottomBrush.destroy();
-		this.bottomBrush = null;
-	},
+    topBrush: null,
+    bottomBrush: null,
 
-	strokeStart: function( mouseX, mouseY )
-	{
-		this.topBrush.strokeStart(mouseX, mouseY);
-		this.bottomBrush.strokeStart(mouseX, this.context.canvas.height - mouseY)
-		
-	},
+    init: function( context )
+    {
+        this.context = context;
+        this.topBrush = new simple(context);
+        this.bottomBrush = new simple(context);
+    },
 
-	stroke: function( mouseX, mouseY )
-	{
-		this.topBrush.stroke(mouseX, mouseY);
-		this.bottomBrush.stroke(mouseX, this.context.canvas.height - mouseY);
-	},
+    destroy: function()
+    {
+        this.topBrush.destroy();
+        this.topBrush = null;
+        this.bottomBrush.destroy();
+        this.bottomBrush = null;
+    },
 
-	strokeEnd: function()
-	{
-		this.topBrush.strokeEnd();
-		this.bottomBrush.strokeEnd();
-	}
+    strokeStart: function( mouseX, mouseY )
+    {
+        this.topBrush.strokeStart(mouseX, mouseY);
+        this.bottomBrush.strokeStart(mouseX, this.context.canvas.height - mouseY)
+
+    },
+
+    stroke: function( mouseX, mouseY )
+    {
+        this.topBrush.stroke(mouseX, mouseY);
+        this.bottomBrush.stroke(mouseX, this.context.canvas.height - mouseY);
+    },
+
+    strokeEnd: function()
+    {
+        this.topBrush.strokeEnd();
+        this.bottomBrush.strokeEnd();
+    }
 }
 

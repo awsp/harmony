@@ -1,61 +1,61 @@
 function squares( context )
 {
-	this.init( context );
+    this.init( context );
 }
 
 squares.prototype =
 {
-	name: "Squares",
-	
-	context: null,
+    name: "Squares",
 
-	prevMouseX: null, prevMouseY: null,
+    context: null,
 
-	init: function( context )
-	{
-		this.context = context;
-		this.context.globalCompositeOperation = 'source-over';
-	},
+    prevMouseX: null, prevMouseY: null,
 
-	destroy: function()
-	{
-	},
+    init: function( context )
+    {
+        this.context = context;
+        this.context.globalCompositeOperation = 'source-over';
+    },
 
-	strokeStart: function( mouseX, mouseY )
-	{
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
-	},
+    destroy: function()
+    {
+    },
 
-	stroke: function( mouseX, mouseY )
-	{
-		var dx, dy, angle, px, py;
-		
-		dx = mouseX - this.prevMouseX;
-		dy = mouseY - this.prevMouseY;
-		angle = 1.57079633;
-		px = Math.cos(angle) * dx - Math.sin(angle) * dy;
-		py = Math.sin(angle) * dx + Math.cos(angle) * dy;
+    strokeStart: function( mouseX, mouseY )
+    {
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
+    },
 
-		this.context.lineWidth = BRUSH_SIZE;
-		this.context.fillStyle = "rgba(" + BACKGROUND_COLOR[0] + ", " + BACKGROUND_COLOR[1] + ", " + BACKGROUND_COLOR[2] + ", " + BRUSH_PRESSURE + ")";
-		this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + BRUSH_PRESSURE + ")";
-		
-		this.context.beginPath();
-		this.context.moveTo(this.prevMouseX - px, this.prevMouseY - py);
-		this.context.lineTo(this.prevMouseX + px, this.prevMouseY + py);
-		this.context.lineTo(mouseX + px, mouseY + py);
-		this.context.lineTo(mouseX - px, mouseY - py);
-		this.context.lineTo(this.prevMouseX - px, this.prevMouseY - py);
-		this.context.fill();
-		this.context.stroke();
+    stroke: function( mouseX, mouseY )
+    {
+        var dx, dy, angle, px, py;
 
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
-	},
+        dx = mouseX - this.prevMouseX;
+        dy = mouseY - this.prevMouseY;
+        angle = 1.57079633;
+        px = Math.cos(angle) * dx - Math.sin(angle) * dy;
+        py = Math.sin(angle) * dx + Math.cos(angle) * dy;
 
-	strokeEnd: function()
-	{
-		
-	}
+        this.context.lineWidth = BRUSH_SIZE;
+        this.context.fillStyle = "rgba(" + BACKGROUND_COLOR[0] + ", " + BACKGROUND_COLOR[1] + ", " + BACKGROUND_COLOR[2] + ", " + BRUSH_PRESSURE + ")";
+        this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + BRUSH_PRESSURE + ")";
+
+        this.context.beginPath();
+        this.context.moveTo(this.prevMouseX - px, this.prevMouseY - py);
+        this.context.lineTo(this.prevMouseX + px, this.prevMouseY + py);
+        this.context.lineTo(mouseX + px, mouseY + py);
+        this.context.lineTo(mouseX - px, mouseY - py);
+        this.context.lineTo(this.prevMouseX - px, this.prevMouseY - py);
+        this.context.fill();
+        this.context.stroke();
+
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
+    },
+
+    strokeEnd: function()
+    {
+
+    }
 }

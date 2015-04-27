@@ -1,64 +1,64 @@
 function circles( context )
 {
-	this.init( context );
+    this.init( context );
 }
 
 circles.prototype =
 {
-	name: "Circles",
-	
-	context: null,
+    name: "Circles",
 
-	prevMouseX: null, prevMouseY: null,
+    context: null,
 
-	count: null,
+    prevMouseX: null, prevMouseY: null,
 
-	init: function( context )
-	{
-		this.context = context;
-		this.context.globalCompositeOperation = 'source-over';
-	},
+    count: null,
 
-	destroy: function()
-	{
-	},
+    init: function( context )
+    {
+        this.context = context;
+        this.context.globalCompositeOperation = 'source-over';
+    },
 
-	strokeStart: function( mouseX, mouseY )
-	{
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
-	},
+    destroy: function()
+    {
+    },
 
-	stroke: function( mouseX, mouseY )
-	{
-		var i, dx, dy, d, cx, cy, steps, step_delta;
+    strokeStart: function( mouseX, mouseY )
+    {
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
+    },
 
-		this.context.lineWidth = BRUSH_SIZE;
-		this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.1 * BRUSH_PRESSURE + ")";	
+    stroke: function( mouseX, mouseY )
+    {
+        var i, dx, dy, d, cx, cy, steps, step_delta;
 
-		dx = mouseX - this.prevMouseX;
-		dy = mouseY - this.prevMouseY;
-		d = Math.sqrt(dx * dx + dy * dy) * 2;
-		
-		cx = Math.floor(mouseX / 100) * 100 + 50;
-		cy = Math.floor(mouseY / 100) * 100 + 50;
-		
-		steps = Math.floor( Math.random() * 10 );
-		step_delta = d / steps;
+        this.context.lineWidth = BRUSH_SIZE;
+        this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.1 * BRUSH_PRESSURE + ")";
 
-		for (i = 0; i < steps; i++)
-		{
-			this.context.beginPath();
-			this.context.arc( cx, cy, (steps - i) * step_delta, 0, Math.PI*2, true);
-			this.context.stroke();
-		}
+        dx = mouseX - this.prevMouseX;
+        dy = mouseY - this.prevMouseY;
+        d = Math.sqrt(dx * dx + dy * dy) * 2;
 
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
-	},
+        cx = Math.floor(mouseX / 100) * 100 + 50;
+        cy = Math.floor(mouseY / 100) * 100 + 50;
 
-	strokeEnd: function()
-	{
-		
-	}
+        steps = Math.floor( Math.random() * 10 );
+        step_delta = d / steps;
+
+        for (i = 0; i < steps; i++)
+        {
+            this.context.beginPath();
+            this.context.arc( cx, cy, (steps - i) * step_delta, 0, Math.PI*2, true);
+            this.context.stroke();
+        }
+
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
+    },
+
+    strokeEnd: function()
+    {
+
+    }
 }

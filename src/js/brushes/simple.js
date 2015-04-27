@@ -1,48 +1,48 @@
 function simple( context )
 {
-	this.init( context );
+    this.init( context );
 }
 
 simple.prototype =
 {
-	name: "Simple",
-	
-	context: null,
+    name: "Simple",
 
-	prevMouseX: null, prevMouseY: null,
+    context: null,
 
-	init: function( context )
-	{
-		this.context = context;
-		this.context.globalCompositeOperation = 'source-over';
-	},
+    prevMouseX: null, prevMouseY: null,
 
-	destroy: function()
-	{
-	},
+    init: function( context )
+    {
+        this.context = context;
+        this.context.globalCompositeOperation = 'source-over';
+    },
 
-	strokeStart: function( mouseX, mouseY )
-	{
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
-	},
+    destroy: function()
+    {
+    },
 
-	stroke: function( mouseX, mouseY )
-	{
-		this.context.lineWidth = BRUSH_SIZE;	
-		this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.5 * BRUSH_PRESSURE + ")";
-		
-		this.context.beginPath();
-		this.context.moveTo(this.prevMouseX, this.prevMouseY);
-		this.context.lineTo(mouseX, mouseY);
-		this.context.stroke();
+    strokeStart: function( mouseX, mouseY )
+    {
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
+    },
 
-		this.prevMouseX = mouseX;
-		this.prevMouseY = mouseY;
-	},
+    stroke: function( mouseX, mouseY )
+    {
+        this.context.lineWidth = BRUSH_SIZE;
+        this.context.strokeStyle = "rgba(" + COLOR[0] + ", " + COLOR[1] + ", " + COLOR[2] + ", " + 0.5 * BRUSH_PRESSURE + ")";
 
-	strokeEnd: function()
-	{
-		
-	}
+        this.context.beginPath();
+        this.context.moveTo(this.prevMouseX, this.prevMouseY);
+        this.context.lineTo(mouseX, mouseY);
+        this.context.stroke();
+
+        this.prevMouseX = mouseX;
+        this.prevMouseY = mouseY;
+    },
+
+    strokeEnd: function()
+    {
+
+    }
 }
